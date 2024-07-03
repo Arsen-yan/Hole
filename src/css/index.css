@@ -10,7 +10,7 @@ body {
 }
 
 #gameScreen {
-  background-image: url(joakim-larsen-earth2.gif);
+  background-image: url(../assets/images/in-game-background.gif);
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -18,7 +18,7 @@ body {
   background-repeat: no-repeat;
 }
 #startScreen {
-  background-image: url(blackHole-START-icegif-804.gif);
+  background-image: url(../assets/images/hole-start.gif);
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -36,7 +36,7 @@ body {
 }
 #startBtn {
   display: flex;
-  background-image: url(push-control-button-blue-steel-technology-switch-sign-symbol-business-electronic-equipment-icon-start-stop-off-on-object-power-device-communication-system-computer-multimedia-click-concept-3d-render-png.png);
+  background-image: url(../assets/images/control.png);
   background-color: black;
   height: 100px;
   width: 100px;
