@@ -10,22 +10,39 @@ body {
 }
 
 #gameScreen {
-  background-image: url(green-grass-background-2036900.jpg);
+  background-image: url(joakim-larsen-earth2.gif);
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-
+#startScreen {
+  background-image: url(blackHole-START-icegif-804.gif);
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#textinfoStart {
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  color: rgb(130, 12, 130);
+  font-size: 60px;
+  font-family: cursive;
+  align-items: center;
+}
 #startBtn {
   display: flex;
   background-image: url(push-control-button-blue-steel-technology-switch-sign-symbol-business-electronic-equipment-icon-start-stop-off-on-object-power-device-communication-system-computer-multimedia-click-concept-3d-render-png.png);
-  height: 120px;
-  width: 120px;
+  background-color: black;
+  height: 100px;
+  width: 100px;
   background-repeat: no-repeat;
   position: absolute;
-  margin-top: 540px;
+  margin-top: 650px;
   margin-left: 800px;
   border-radius: 50%;
   background-position: center;
@@ -36,8 +53,8 @@ body {
 
 #startText {
   position: absolute;
-  top: 140px;
-  left: 1px;
+  top: 110px;
+  left: -5px;
   color: rgb(164, 160, 160);
   font-size: 30px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -45,7 +62,8 @@ body {
   white-space: nowrap;
 }
 
-#mainPlayer {
+#mainPlayer,
+#randomPlayer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -54,6 +72,10 @@ body {
   width: 100px;
   border-radius: 50%;
   background-color: black;
+}
+
+#randomPlayer {
+  background-color: brown;
 }
 
 @media screen and (max-width: 768px) {
