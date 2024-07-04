@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hole</title>
+    <link rel="stylesheet" href="./src/css/index.css" />
+  </head>
+  <body>
+    <div id="startScreen">
+      <span id="textinfoStart">
+        Black holes are places in the universe where gravity is so strong it
+        distorts the time and space around it; once inside, nothing — not even
+        light — can get out.
+      </span>
+      <button id="startBtn">
+        <span id="startText"> StArT GaMe</span>
+      </button>
+    </div>
+    <div id="gameScreen" class="hidden">
+      <div id="mainPlayer"></div>
+      <div id="randomPlayer"></div>
+      <div class="figure" style="left: 200px; top: 200px"></div>
+      <div class="figure" style="left: 300px; top: 300px"></div>
+    </div>
+
+    <audio id="backgroundAudio" src="./src/audio/audio1.mp3"></audio>
+
+    <script src="./src/js/Player.js"></script>
+    <script src="./src/js/Game.js"></script>
+    <script src="./src/js/index.js"></script>
+  </body>
+</html>
