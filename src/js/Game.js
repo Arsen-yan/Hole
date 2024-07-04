@@ -22,7 +22,7 @@ class Game {
   }
 
   startGeneratingFigures() {
-    this.generateFigure(); // Generate an initial figure
+    this.generateFigure(); //Generate an initial figure
     setInterval(() => this.generateFigure(), 3000); // Generate a figure every 3 seconds
   }
 
@@ -39,7 +39,7 @@ class Game {
   }
 
   resetGame() {
-    // Reset game state here if needed
+    // Reset game state here if needed.
   }
 }
 

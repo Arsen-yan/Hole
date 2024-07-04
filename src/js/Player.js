@@ -3,8 +3,8 @@ class Player {
     this.player = document.getElementById("mainPlayer");
     this.gameScreen = document.getElementById("gameScreen");
 
-    this.x = 750; // Initial x position
-    this.y = 400; // Initial y position
+    this.x = 750; // Initial x position //
+    this.y = 400; // Initial y position //
     this.speed = 2;
     this.figuresEaten = 0;
     this.keysPressed = {};
