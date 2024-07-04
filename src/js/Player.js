@@ -3,10 +3,10 @@ class Player {
     this.player = document.getElementById("mainPlayer");
     this.gameScreen = document.getElementById("gameScreen");
 
-    this.x = 750; //750
-    this.y = 400; //400
-    this.speed = 4;
-
+    this.x = 750; // Initial x position
+    this.y = 400; // Initial y position
+    this.speed = 2;
+    this.figuresEaten = 0;
     this.keysPressed = {};
 
     this.updatePosition();
@@ -15,25 +15,21 @@ class Player {
     this.move = this.move.bind(this);
     window.addEventListener("keydown", this.handleKeyDown);
     window.addEventListener("keyup", this.handleKeyUp);
-    // this.move();
   }
 
   handleKeyDown(event) {
-    console.log("keyup");
     this.keysPressed[event.key.toLowerCase()] = true;
   }
 
   handleKeyUp(event) {
-    console.log("keydown");
     this.keysPressed[event.key.toLowerCase()] = false;
   }
 
   move() {
-    // requestAnimationFrame(this.move);
-    console.log("move called");
     let moveX = 0;
     let moveY = 0;
     let isMoving = false;
+
     if (this.keysPressed["arrowleft"] || this.keysPressed["a"]) {
       moveX -= this.speed;
       isMoving = true;
@@ -54,63 +50,111 @@ class Player {
     if (isMoving) {
       this.x += moveX;
       this.y += moveY;
+      this.checkBounds();
+      this.checkCollision();
       isMoving = false;
     }
 
     this.updatePosition();
   }
 
+  checkBounds() {
+    const playerWidth = this.player.offsetWidth;
+    const playerHeight = this.player.offsetHeight;
+    const gameScreenWidth = this.gameScreen.clientWidth;
+    const gameScreenHeight = this.gameScreen.clientHeight;
+
+    if (this.x < 0) {
+      this.x = 0;
+      this.reverseDirection("x");
+    }
+    if (this.y < 0) {
+      this.y = 0;
+      this.reverseDirection("y");
+    }
+    if (this.x + playerWidth > gameScreenWidth) {
+      this.x = gameScreenWidth - playerWidth;
+      this.reverseDirection("x");
+    }
+    if (this.y + playerHeight > gameScreenHeight) {
+      this.y = gameScreenHeight - playerHeight;
+      this.reverseDirection("y");
+    }
+  }
+
+  // Add this method to reverse direction on hitting a wall
+  reverseDirection(axis) {
+    if (axis === "x") {
+      this.speedX = -this.speedX;
+    } else if (axis === "y") {
+      this.speedY = -this.speedY;
+    }
+  }
+
   updatePosition() {
     this.player.style.left = `${this.x}px`;
     this.player.style.top = `${this.y}px`;
   }
+
+  checkCollision() {
+    const figures = document.querySelectorAll(".figure");
+    figures.forEach((figure) => {
+      const figureRect = figure.getBoundingClientRect();
+      const playerRect = this.player.getBoundingClientRect();
+
+      if (
+        playerRect.x < figureRect.x + figureRect.width &&
+        playerRect.x + playerRect.width > figureRect.x &&
+        playerRect.y < figureRect.y + figureRect.height &&
+        playerRect.y + playerRect.height > figureRect.y
+      ) {
+        figure.remove(); // Remove figure if collision detected
+        this.figuresEaten++;
+        this.grow();
+      }
+    });
+  }
+  grow() {
+    const currentWidth = this.player.offsetWidth;
+    const currentHeight = this.player.offsetHeight;
+    this.player.style.width = `${currentWidth + 5}px`; // Increase size by 5px
+    this.player.style.height = `${currentHeight + 5}px`;
+  }
+  win() {
+    console.log("Player wins!");
+    // Display a message or perform any action for winning
+    // Example: Display a victory message, stop game updates, etc.
+  }
 }
 
-// const mainPlayer = new Player();
+addEventListener("keydown", (evn) => {
+  console.log(evn.key.charCodeAt);
+});
 
-// ************************************* //
+class RandomPlayer extends Player {
+  constructor() {
+    super();
+    this.player = document.getElementById("randomPlayer");
 
-// class RandomPlayer extends MainPlayer {
-//   constructor() {
-//     super();
-//     this.player = document.getElementById("randomPlayer");
-//     this.x = Math.random() * (this.gameScreen.clientWidth - 100); // Random starting X position
-//     this.y = Math.random() * (this.gameScreen.clientHeight - 100); // Random starting Y position
-//     this.speed = 2;
+    this.moveRandomly();
+  }
 
-//     this.moveRandomly();
-//   }
+  moveRandomly() {
+    setInterval(() => {
+      const directions = [
+        { moveX: -this.speed, moveY: 0 },
+        { moveX: this.speed, moveY: 0 },
+        { moveX: 0, moveY: -this.speed },
+        { moveX: 0, moveY: this.speed },
+      ];
+      const randomDirection =
+        directions[Math.floor(Math.random() * directions.length)];
 
-//   moveRandomly() {
-//     setInterval(() => {
-//       const directions = [
-//         { moveX: -this.speed, moveY: 50 }, // Left
-//         { moveX: this.speed, moveY: 50 }, // Right
-//         { moveX: 50, moveY: -this.speed }, // Up
-//         { moveX: 50, moveY: this.speed }, // Down
-//       ];
-//       const randomDirection =
-//         directions[Math.floor(Math.random() * directions.length)];
-
-//       this.x += randomDirection.moveX;
-//       this.y += randomDirection.moveY;
-
-//       // Ensure the player stays within the game screen bounds
-//       this.x = Math.max(
-//         0,
-//         Math.min(this.x, this.gameScreen.clientWidth - this.player.clientWidth)
-//       );
-//       this.y = Math.max(
-//         0,
-//         Math.min(
-//           this.y,
-//           this.gameScreen.clientHeight - this.player.clientHeight
-//         )
-//       );
-
-//       this.updatePosition();
-//     }, 500); // Change direction every 500 milliseconds
-//   }
-// }
-
-// const randomPlayer = new RandomPlayer();
+      this.x += randomDirection.moveX;
+      this.y += randomDirection.moveY;
+      this.checkBounds();
+      this.updatePosition();
+      this.checkCollision();
+    }, 1000);
+  }
+}
