@@ -5,7 +5,7 @@ class Player {
 
     this.x = 750; // Initial x position //
     this.y = 400; // Initial y position //
-    this.speed = 2;
+    this.speed = 5;
     this.figuresEaten = 0;
     this.keysPressed = {};
 
@@ -120,41 +120,32 @@ class Player {
     this.player.style.width = `${currentWidth + 5}px`; // Increase size by 5px
     this.player.style.height = `${currentHeight + 5}px`;
   }
-  win() {
-    console.log("Player wins!");
-    // Display a message or perform any action for winning
-    // Example: Display a victory message, stop game updates, etc.
-  }
 }
-
-addEventListener("keydown", (evn) => {
-  console.log(evn.key.charCodeAt);
-});
 
 class RandomPlayer extends Player {
   constructor() {
     super();
     this.player = document.getElementById("randomPlayer");
-
     this.moveRandomly();
   }
 
   moveRandomly() {
     setInterval(() => {
+      this.speed = Math.floor(Math.random() * 1000);
       const directions = [
         { moveX: -this.speed, moveY: 0 },
         { moveX: this.speed, moveY: 0 },
         { moveX: 0, moveY: -this.speed },
         { moveX: 0, moveY: this.speed },
       ];
+
       const randomDirection =
         directions[Math.floor(Math.random() * directions.length)];
-
       this.x += randomDirection.moveX;
       this.y += randomDirection.moveY;
       this.checkBounds();
       this.updatePosition();
       this.checkCollision();
-    }, 1000);
+    }, 500);
   }
 }
