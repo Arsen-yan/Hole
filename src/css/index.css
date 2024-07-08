@@ -29,12 +29,13 @@ body {
   width: 600px;
   height: 600px;
   position: absolute;
-  color: rgb(130, 12, 130);
+  color: rgb(69, 147, 16);
   font-size: 60px;
   font-family: cursive;
   align-items: center;
 }
-#startBtn {
+#startBtn,
+#resetBtn {
   background-image: url(../assets/images/control.png);
   background-color: black;
   height: 100px;
@@ -49,8 +50,17 @@ body {
   display: block;
   border: none;
 }
-
-#startText {
+#resetScreen {
+  background-image: url(../assets/images/blackHole-GameOver.gif);
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+#startText,
+#resetText {
   position: absolute;
   top: 110px;
   left: -5px;
@@ -66,7 +76,6 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* transform: translate(-50%, -50%); */
   height: 100px;
   width: 100px;
   border-radius: 50%;
@@ -75,14 +84,27 @@ body {
 
 #randomPlayer {
   background-color: rgb(243, 239, 239);
+  transition: 2s;
 }
-
+.gameOver {
+  background-image: url(/src/assets/images/blackHole-GameOver.gif);
+}
 .figure {
   position: absolute;
+  align-items: center;
   width: 50px;
   height: 50px;
-  background-color: red;
+  background-image: url(/src/assets/images/small\ planet.jpg);
+  background-size: cover;
   border-radius: 50%;
+}
+
+#gameSummary {
+  font-size: 70px;
+  color: rgb(135, 8, 135);
+  position: absolute;
+  top: 50%;
+  left: 40%;
 }
 
 @media screen and (max-width: 768px) {

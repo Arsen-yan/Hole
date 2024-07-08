@@ -3,11 +3,7 @@ window.onload = () => {
   document
     .getElementById("startBtn")
     .addEventListener("click", () => game.start());
+  document
+    .getElementById("resetBtn")
+    .addEventListener("click", () => game.start());
 };
-
-// function audio(url) {
-//   const audio = document.createElement("audio");
-//   audio.src = url;
-//   audio.play();
-// }
-// audio("");
